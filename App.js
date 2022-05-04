@@ -1,15 +1,17 @@
 import { View, Text } from "react-native";
+import About from "./components/restaurantDetail/About";
+import Home from "./screens/Home";
+import RestaurantDetail from "./screens/RestaurantDetail";
+import RootNavigation from "./navigation";
+
 
 export default function App() {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Universal React with Expo</Text>
-    </View>
+    // <View>
+    //  <Home></Home>
+    //  <RestaurantDetail/>
+    // </View>
+    
+    <RootNavigation/>
   );
 }
