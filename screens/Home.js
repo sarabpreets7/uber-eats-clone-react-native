@@ -99,7 +99,7 @@ fetch('https://worldwide-restaurants.p.rapidapi.com/search', options)
                
             </View>
             <ScrollView vertical showsVerticalScrollIndicator={false}>
-                <Categories/>
+                <Categories activeState={activeState} setActiveState={setActiveState}/>
                 <RestaurantItems navigation={navigation} localRestaurants={restaurantData}></RestaurantItems>
                 
             </ScrollView>

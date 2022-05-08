@@ -1,11 +1,13 @@
-import React ,{ useState }from "react";
+import React ,{ useEffect, useState }from "react";
 import {View, Text, TouchableOpacity} from "react-native";
 
 export default function HeaderTabs(props){
+
+    useEffect(()=>{
+        console.log(props.activeState);
+
+    },[props.activeState])
     
-
-
-
     return(
         <View style={{flexDirection:'row',alignItems:'center',width:'100%',justifyContent:'center'}}>
             <HeaderButton  title="Delivery" btnColor="black" txtColor="white" activeState={props.activeState} setActiveTab={props.setActiveState}/>

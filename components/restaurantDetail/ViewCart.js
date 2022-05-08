@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, Modal, StyleSheet,ScrollView } from "reac
 import { useSelector } from "react-redux";
 import OrderItem from "./OrderItem";
 
-export default function ViewCart(props) {
+export default function ViewCart({navigation},props) {
 
   const [modal, setModal] = useState(false);
 
@@ -21,9 +21,12 @@ export default function ViewCart(props) {
     .reduce((prev, curr) => prev + curr, 0);
 
 
+    const checkout =() =>{
+      navigation.navigate('OrderCompleted')
+    }
   return (<>
-    {modal ? <Modal onRequestClose={()=> setModal(false)} transparent={true} animationType='slide' visible={modal}>
-      <ModelContent restaurantName={props.restaurantName} totalPrice={total} cartItems={items} setModal={setModal} />
+    {modal ? <Modal  onRequestClose={()=> setModal(false)} transparent={true} animationType='slide' visible={modal}>
+      <ModelContent checkout={checkout} restaurantName={props.restaurantName} totalPrice={total} cartItems={items} setModal={setModal} />
     </Modal> : <></>}
     {total != 0 ?
       <View style={{
@@ -89,7 +92,7 @@ const ModelContent = (props) => (
           <Text>${props.totalPrice}</Text>
         </View>
 
-        <TouchableOpacity onPress={() => { props.setModal(false) }} style={{
+        <TouchableOpacity onPress={() => { props.checkout() }} style={{
           backgroundColor: "black",
           marginTop:20,
           alignItems: "center",

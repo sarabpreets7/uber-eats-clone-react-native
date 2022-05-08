@@ -1,4 +1,5 @@
-import { View, Text, Image, ScrollView } from "react-native";
+import { View, Text, Image, ScrollView,TouchableOpacity } from "react-native";
+import finalPropsSelectorFactory from "react-redux/es/connect/selectorFactory";
 
 
 const items = [
@@ -33,17 +34,24 @@ const items = [
   ];
   
 
-export default function Categories(){
+export default function Categories(props){
+
+  const changeState =(option) =>{
+      
+      if(option == 'Pick-up'){
+        props.setActiveState('Pickup')
+      }
+  }
     return(
         <View style={{paddingVertical:10,paddingLeft:20,backgroundColor:'#fff',marginTop:5}}>
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
 
                 {items.map(function(item,index){
                     return(
-                        <View key={index} style={{marginRight:10,alignItems:'center'}}>
+                        <TouchableOpacity onPress={()=> changeState(item.text)} key={index} style={{marginRight:10,alignItems:'center'}}>
                             <Image style={{width:50,height:40,resizeMode:'contain'}} source={item.image}/>
                             <Text style={{fontSize:13,fontWeight: 'bold'}}>{item.text}</Text>
-                        </View>
+                        </TouchableOpacity>
                     )
                 })}
 

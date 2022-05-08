@@ -1,8 +1,8 @@
-import { ScrollView, View } from "react-native";
-import { Divider } from "react-native-elements";
-import About from "../components/restaurantDetail/About";
+import { SafeAreaView, View,Text } from "react-native";
+import LottieView from "lottie-react-native";
 import MenuItems from "../components/restaurantDetail/MenuItems";
-import ViewCart from "../components/restaurantDetail/ViewCart";
+import { ScrollView } from "react-native-gesture-handler";
+import { useSelector } from "react-redux";
 
 
 const foods = [
@@ -45,18 +45,38 @@ const foods = [
     },
   ];
 
-export default function RestaurantDetail({ route, navigation }){
-  // console.log(route.params.name);
+
+export default function OrderCompleted({navigation}){
+
+    const cartItems = useSelector(
+        (state) => state.cartReducer.selectedItems.items
+      );
+
 
     return(
-        <View>
-            <ScrollView style={{zIndex:44}} vertical showsVerticalScrollIndicator={false}>
-            <About restaurantName ={route.params.name} restaurantImage={route.params.image}
-                    rating={route.params.rating} reviews={route.params.reviews}/>
-            <Divider width={1.8} style={{ marginVertical: 20 }} />
-                <MenuItems restaurantName ={route.params.name}  foods={foods}/>
-            </ScrollView>
-            <ViewCart  navigation={navigation} restaurantName ={route.params.name}/>
-        </View>
+        
+            <View style={{paddingTop:26,flex:1,justifyContent:'center',backgroundColor:'white'}}>
+               
+               <LottieView style={{ height: 100, alignSelf: "center", marginBottom: 15 }}
+               source={require("../assets/animations/check-mark.json")}
+               autoPlay
+               speed={0.5}
+               loop={false}/>
+
+               <View style={{marginHorizontal:25,marginBottom:20}}>
+                   <Text style={{fontSize:17,fontWeight:'bold'}}>Your order at Farmhouse Pizza has been placed for $76.5</Text>
+               </View>
+
+               <ScrollView showsVerticalScrollIndicator={false} style={{maxHeight:350,marginHorizontal:20}}>
+                    <MenuItems checkbox={false} foods={cartItems}/>
+               </ScrollView>
+
+                <LottieView
+                      style={{ height: 150, alignSelf: "center",margin:5 }}
+                      source={require("../assets/animations/cooking.json")}
+                      autoPlay
+                      speed={0.5}/>
+            </View>
+        
     )
 }

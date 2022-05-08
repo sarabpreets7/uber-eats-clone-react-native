@@ -57,10 +57,10 @@ export default function MenuItems(props) {
                 return (
                     <View key={index} style={{ marginBottom: 20 }}>
                         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginHorizontal: 10, marginBottom: 20 }}>
-
-                            <BouncyCheckbox iconStyle={{ borderColor: "lightgray", borderRadius: 0 }}
+                            {props.checkbox !== false?<BouncyCheckbox iconStyle={{ borderColor: "lightgray", borderRadius: 0 }}
                                 fillColor="green" onPress={(checkboxValue)=>{selectItem(food,checkboxValue)}}
-                                isChecked={isFoodInCart(food,cartItems)}/>
+                                isChecked={isFoodInCart(food,cartItems)}/>:<></>}
+                            
                             <ItemInfo title={food.title} desc={food.description} price={food.price} />
                             <ItemImage image={food.image} />
 
